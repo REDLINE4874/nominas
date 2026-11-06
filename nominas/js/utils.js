@@ -109,7 +109,7 @@ const run =
       toast(e.message || "Error", true);
     }
   };
-const isAdmin = () => S.rol === "administrador";
+const isAdmin = () => S.authenticated;
 const canManageStaff = () => S.authenticated;
 const setTheme = (t) => {
   document.documentElement.dataset.theme = t;

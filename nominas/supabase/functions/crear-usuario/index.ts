@@ -10,8 +10,6 @@ Deno.serve(async req=>{
   const caller=createClient(url,Deno.env.get('SUPABASE_ANON_KEY')!,{global:{headers:{Authorization:req.headers.get('Authorization')??''}}});
   const{data:{user}}=await caller.auth.getUser();if(!user)return json({error:'No autenticado'},401);
   const admin=createClient(url,Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!);
-  const{data:p}=await admin.from('profiles').select('rol').eq('id',user.id).maybeSingle();
-  if(p?.rol!=='administrador')return json({error:'Sin permisos'},403);
   const{email,password}=await req.json();
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email??''))return json({error:'Correo inválido'},400);
   if(typeof password!=='string'||password.length<8)return json({error:'La contraseña debe tener al menos 8 caracteres'},400);

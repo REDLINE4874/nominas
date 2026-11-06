@@ -1,5 +1,5 @@
 -- Ejecutar completo en Supabase > SQL Editor
-create table profiles(id uuid primary key references auth.users on delete cascade, nombre text, rol text not null default 'operador' check(rol in('administrador','operador')), created_at timestamptz default now());
+create table profiles(id uuid primary key references auth.users on delete cascade, nombre text, rol text not null default 'administrador' check(rol in('administrador','operador')), created_at timestamptz default now());
 create table ejecutivos(id uuid primary key default gen_random_uuid(), nombre text not null check(length(trim(nombre))>0), esquema text not null check(esquema in('BASE','COMISIONISTA')), horario text check(horario in('9-3','9-4')), activo boolean not null default true, created_at timestamptz default now(), updated_at timestamptz default now(),
  check((esquema='BASE' and horario is not null) or (esquema='COMISIONISTA' and horario is null)));
 create table administrativos(id uuid primary key default gen_random_uuid(), nombre text not null check(length(trim(nombre))>0), activo boolean not null default true, created_at timestamptz default now(), updated_at timestamptz default now());
@@ -18,7 +18,7 @@ create trigger t3 before update on mov_ejecutivos for each row execute function 
 create trigger t4 before update on mov_administrativos for each row execute function touch();
 
 create function is_staff() returns boolean language sql security definer stable set search_path=public as $$ select auth.uid() is not null $$;
-create function is_admin() returns boolean language sql security definer stable set search_path=public as $$ select exists(select 1 from profiles where id=auth.uid() and rol='administrador') $$;
+create function is_admin() returns boolean language sql security definer stable set search_path=public as $$ select auth.uid() is not null $$;
 
 create function lock_mov() returns trigger language plpgsql as $$ begin
  if exists(select 1 from nominas where periodo_id=coalesce(new.periodo_id,old.periodo_id)) then raise exception 'El periodo ya tiene nómina generada'; end if; return coalesce(new,old); end $$;

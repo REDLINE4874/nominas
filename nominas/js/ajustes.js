@@ -5,7 +5,7 @@ V.config = async () => {
   $("#main").innerHTML =
     `<div class="card"><b>Conexión</b><p id="cs" class="muted">Verificando…</p></div>` +
     (isAdmin()
-      ? `<div class="card"><b>Perfiles administrativos</b>${p.map((u) => `<div class="row"><span>${esc(u.nombre || u.id.slice(0, 8))}</span><span>${esc(u.rol)}</span></div>`).join("")}<p class="muted">El acceso se controla con Supabase Auth. Solo los perfiles marcados como administrador reciben permisos administrativos.</p></div>`
+      ? `<div class="card"><b>Perfiles administrativos</b>${p.map((u) => `<div class="row"><span>${esc(u.nombre || u.id.slice(0, 8))}</span><span>Administrador</span></div>`).join("")}<p class="muted">Todos los usuarios autenticados en Supabase tienen permisos administrativos.</p></div>`
       : "");
   sb.from("profiles")
     .select("id", { head: true })
