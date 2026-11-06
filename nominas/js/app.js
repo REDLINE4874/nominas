@@ -18,7 +18,7 @@ const weekLabel = (weekStart) => {
   return `${start.toLocaleDateString("es-MX", options)} - ${end.toLocaleDateString("es-MX", { ...options, year: "numeric" })}`;
 };
 const weekBar = () =>
-  `<div class="card week-picker ${S.view === "nomina" ? "payroll-week-sticky" : S.view === "movimientos" ? "capture-week-sticky" : ""}"><button type="button" class="week-arrow" id="wkprev" aria-label="Semana anterior"><span>&#x2039;</span></button><div class="week-current"><span>SEMANA DE PRODUCCI&Oacute;N</span><b>${weekLabel(S.week)}</b></div><button type="button" class="week-today" id="wktoday">&Uacute;ltima semana cerrada</button><button type="button" class="week-arrow" id="wknext" aria-label="Semana siguiente" ${S.week >= lastClosedWeek() ? "disabled" : ""}><span>&#x203a;</span></button></div>`;
+  `<div class="card week-picker ${S.view === "nomina" ? "payroll-week-sticky" : S.view === "movimientos" ? "capture-week-sticky" : ""}"><button type="button" class="week-arrow" id="wkprev" aria-label="Semana anterior"><span>&#x2039;</span></button><div class="week-current"><span>SEMANA DE PRODUCCI&Oacute;N</span><b>${weekLabel(S.week)}</b></div><button type="button" class="week-today" id="wktoday">Semana Actual</button><button type="button" class="week-arrow" id="wknext" aria-label="Semana siguiente" ${S.week >= lastClosedWeek() ? "disabled" : ""}><span>&#x203a;</span></button></div>`;
 const bindWeek = () => {
   const shiftWeek = (amount) => {
     const d = new Date(S.week + "T00:00:00");
