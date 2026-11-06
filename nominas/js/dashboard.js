@@ -6,7 +6,7 @@ V.dashboard = async () => {
     na = act ? act.ad : rows.filter((r) => r.tipo === "ADMIN").length;
   $("#main").innerHTML =
     weekBar() +
-    `<p class="muted">${nom ? "Nómina generada" : "Vista previa (nómina no generada; solo movimientos capturados)"}</p><div class="grid">${[
+    `${nom ? '<p class="muted">Nómina generada</p>' : ""}<div class="grid">${[
       ["Ejecutivos" + (act ? " activos" : " en nómina"), ne],
       ["Administrativos" + (act ? " activos" : " en nómina"), na],
       ["Ventas ejecutivos", e.v],

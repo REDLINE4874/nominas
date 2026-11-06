@@ -73,7 +73,7 @@ V.personal = async () => {
     $("#dlg").showModal();
   };
 
-  $("#main").innerHTML = `<div class="card row"><input id="qs" placeholder="Buscar por nombre" type="search">${dropdownMarkup("qf", [["", "Todos los roles"], ["EJECUTIVO", "Ejecutivos"], ["BASE", "Sueldo base"], ["COMISIONISTA", "Comisionistas"], ["ADMIN", "Administrativos"], ["activo", "Activos"], ["inactivo", "Inactivos"]])}${canManageStaff() ? '<button class="btn pri" id="nw">Dar de alta empleado</button>' : ""}</div><div id="lst"></div>`;
+  $("#main").innerHTML = `<div class="card row staff-filters"><input id="qs" placeholder="Buscar por nombre" type="search">${dropdownMarkup("qf", [["", "Todos los roles"], ["EJECUTIVO", "Ejecutivos"], ["BASE", "Sueldo base"], ["COMISIONISTA", "Comisionistas"], ["ADMIN", "Administrativos"], ["activo", "Activos"], ["inactivo", "Inactivos"]])}${canManageStaff() ? '<button class="btn pri" id="nw">Dar de alta empleado</button>' : ""}</div><div id="lst"></div>`;
   initDropdowns($("#main"));
   $("#qs").oninput = draw;
   $("#qf").onchange = draw;

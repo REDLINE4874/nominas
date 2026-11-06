@@ -48,3 +48,20 @@ dialog{width:min(92vw,460px);padding:20px;border:0;border-radius:22px;background
 @media(max-width:600px){nav{gap:5px;padding:3px}nav button{flex:1 1 0;min-width:0;padding:6px 3px;font-size:.68rem;line-height:1.15;white-space:normal}}
 
 .week-arrow:disabled{opacity:.35;cursor:not-allowed;box-shadow:var(--pressed)}
+
+/* Give payroll column headings stronger contrast and hierarchy. */
+.payroll thead th{background:color-mix(in srgb,var(--ac) 13%,var(--pn));border-bottom:2px solid color-mix(in srgb,var(--ac) 58%,var(--pn));color:var(--tx);font-size:.78rem;font-weight:800;letter-spacing:.045em;text-transform:uppercase}
+.payroll thead th:first-child{border-radius:10px 0 0 10px}.payroll thead th:last-child{border-radius:0 10px 10px 0}
+.payroll thead th{position:sticky;top:0;z-index:4}
+@media(max-width:640px){.payroll thead th{padding:7px 2px;font-size:.66rem;font-weight:800;letter-spacing:.01em}}
+
+/* Keep Personal and History filters readable on narrow screens. */
+.staff-filters>.custom-dropdown,.history-filters>.custom-dropdown{min-width:0}
+@media(max-width:600px){.staff-filters,.history-filters{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}.staff-filters>*,.history-filters>*{width:100%;min-width:0}.staff-filters .btn{margin:0}}
+
+.payroll [data-col="details"]{display:none}
+.payroll-detail-btn{min-height:36px;padding:6px 9px;border:0;border-radius:10px;background:var(--ac);color:var(--on);font-size:.72rem;font-weight:750;box-shadow:var(--raised-small)}
+.payroll-detail{max-height:min(78dvh,720px);overflow-y:auto}.payroll-detail h2{margin:0 0 16px;font-size:1.15rem;overflow-wrap:anywhere}.payroll-detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:18px}.payroll-detail-grid>div{display:grid;gap:4px;min-width:0;padding:11px;border-radius:12px;background:var(--field);box-shadow:var(--pressed)}.payroll-detail-grid span{color:var(--t2);font-size:.76rem}.payroll-detail-grid b{overflow-wrap:anywhere;font-size:.92rem}.payroll-detail>.btn{width:100%;margin:0}
+@media(max-width:640px){.payroll [data-col="number"],.payroll [data-col="shift"],.payroll [data-col="base"],.payroll [data-col="bonus"],.payroll [data-col="absence"],.payroll [data-col="tardy"],.payroll [data-col="sales"],.payroll [data-col="rate"],.payroll [data-col="commission"],.payroll [data-col="discount"],.payroll [data-col="excess"]{display:none}.payroll [data-col="name"]{width:auto;text-align:left}.payroll [data-col="total"]{width:28%}.payroll [data-col="details"]{display:table-cell;width:22%}.payroll thead [data-col="details"]{font-size:0}.payroll:not(.has-actions) [data-col="name"]{width:50%}.payroll:not(.has-actions) [data-col="total"]{width:28%}.payroll:not(.has-actions) [data-col="details"]{width:22%}.payroll-detail-btn{min-height:34px;padding:5px 7px;font-size:.68rem}.payroll-detail-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.payroll [data-col="actions"] .btn{margin:2px;padding:5px 7px;font-size:.65rem}}
+.mov-heading{display:flex;cursor:pointer;list-style:none;align-items:center}.mov-heading::-webkit-details-marker{display:none}.mov-heading::after{width:9px;height:9px;flex:none;margin:0 4px 4px 12px;border-right:2px solid var(--t2);border-bottom:2px solid var(--t2);content:"";transform:rotate(45deg);transition:transform .16s}.mov[open]>.mov-heading::after{margin-bottom:0;transform:rotate(225deg)}.mov-heading:focus-visible{outline:none;border-radius:8px;box-shadow:var(--focus)}
+@media(max-width:640px){.payroll tbody tr:not(.payroll-section) td{padding:10px 8px}.payroll thead th{padding:8px 6px}}

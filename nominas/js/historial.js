@@ -6,7 +6,7 @@ V.historial = async () => {
       .order("created_at", { ascending: false }),
   );
   $("#main").innerHTML =
-    `<div class="card row">${dropdownMarkup("hs", [["", "Elige un periodo"], ...l.map((n) => [n.id, `${n.periodos.inicio} a ${n.periodos.fin}`])])}<input id="hq" type="search" placeholder="Buscar empleado"></div><div id="hd">${l.length ? "" : '<p class="muted">Aún no hay nóminas generadas.</p>'}</div>`;
+    `<div class="card row history-filters">${dropdownMarkup("hs", [["", "Elige un periodo"], ...l.map((n) => [n.id, `${n.periodos.inicio} a ${n.periodos.fin}`])])}<input id="hq" type="search" placeholder="Buscar empleado"></div><div id="hd">${l.length ? "" : '<p class="muted">Aún no hay nóminas generadas.</p>'}</div>`;
   initDropdowns($("#main"));
   const show = run(async () => {
     const id = $("#hs").value;

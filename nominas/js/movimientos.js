@@ -13,11 +13,11 @@ V.movimientos = async () => {
     `<label>${key}<input type="number" inputmode="decimal" min="0" step="${step}" data-k="${key}" value="${value}" ${nom ? "disabled" : ""}></label>`;
   const executiveCards = ej.map((employee) => {
     const movement = me.find((row) => row.ejecutivo_id === employee.id) || {};
-    return `<article class="card mov" data-t="e" data-id="${employee.id}"><div class="mov-heading"><b>${esc(employee.nombre)}</b><span class="mov-role">${esc(employee.esquema)}${employee.horario ? ` · ${employee.horario}` : ""}</span></div><div class="f4">${input("Ventas", movement.ventas ?? 0)}${input("Bonos", movement.bonos ?? 0, "0.01")}${input("Faltas", movement.faltas ?? 0)}${input("Retardos", movement.retardos ?? 0)}</div></article>`;
+    return `<details class="card mov" data-t="e" data-id="${employee.id}"><summary class="mov-heading"><b>${esc(employee.nombre)}</b></summary><div class="f4">${input("Ventas", movement.ventas ?? 0)}${input("Bonos", movement.bonos ?? 0, "0.01")}${input("Faltas", movement.faltas ?? 0)}${input("Retardos", movement.retardos ?? 0)}</div></details>`;
   }).join("");
   const administrativeCards = ad.map((employee) => {
     const movement = ma.find((row) => row.admin_id === employee.id) || {};
-    return `<article class="card mov" data-t="a" data-id="${employee.id}"><div class="mov-heading"><b>${esc(employee.nombre)}</b><span class="mov-role">Administrativo</span></div><div class="f4">${input("Ventas", movement.ventas ?? 0)}${input("Salario base", movement.salario_base ?? 0, "0.01")}</div></article>`;
+    return `<details class="card mov" data-t="a" data-id="${employee.id}"><summary class="mov-heading"><b>${esc(employee.nombre)}</b></summary><div class="f4">${input("Ventas", movement.ventas ?? 0)}${input("Salario base", movement.salario_base ?? 0, "0.01")}</div></details>`;
   }).join("");
   const count = ej.length + ad.length;
   $("#main").innerHTML =
