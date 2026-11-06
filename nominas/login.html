@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <title>Nóminas</title>
+    <meta name="theme-color" content="#292929" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Nóminas" />
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+    <link rel="icon" href="assets/icons/icon-192.png" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <section id="login">
+      <form id="lform" class="card">
+        <h2>Nóminas semanales</h2>
+        <label
+          >Correo<input
+            id="email"
+            type="email"
+            required
+            autocomplete="username" /></label
+        ><label
+          >Contraseña<input
+            id="pass"
+            type="password"
+            required
+            autocomplete="current-password"
+        /></label>
+        <p id="lerr" class="err" role="alert"></p>
+        <button class="btn pri">Entrar</button>
+      </form>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/login.js"></script>
+  </body>
+</html>

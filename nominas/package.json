@@ -1,0 +1,3 @@
+{"name":"nominas-semanales","version":"1.0.0","private":true,
+ "scripts":{"start":"npx serve .","test":"node tests/calc.test.cjs && node tests/db.test.mjs && node tests/ui.test.mjs","test:calc":"node tests/calc.test.cjs","test:db":"node tests/db.test.mjs","test:ui":"node tests/ui.test.mjs"},
+ "devDependencies":{"@electric-sql/pglite":"^0.2.0","jsdom":"^25.0.0"}}

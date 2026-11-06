@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <title>Nóminas</title>
+    <meta name="theme-color" content="#292929" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Nóminas" />
+    <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png" />
+    <link rel="icon" href="assets/icons/icon-192.png" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div id="app" hidden>
+      <aside>
+        <b class="logo">Nóminas</b>
+        <nav>
+          <button data-v="dashboard">Inicio</button
+          ><button data-v="nomina">N&oacute;mina</button
+          ><button data-v="movimientos">Capturar n&oacute;mina</button
+          ><button data-v="personal">Personal</button
+          ><button data-v="historial">Historial</button>
+        </nav>
+      </aside>
+      <header>
+        <span id="net"></span
+        ><button class="btn" id="themeBtn" aria-label="Cambiar tema">◐</button
+        ><button class="btn" id="logout">Salir</button>
+      </header>
+      <main id="main"></main>
+    </div>
+    <dialog id="dlg"></dialog>
+    <div id="toast" role="status"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/calculations.js"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/periodo.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/plantillas.js"></script>
+    <script src="js/movimientos.js"></script>
+    <script src="js/nominas.js"></script>
+    <script src="js/historial.js"></script>
+    <script src="js/ajustes.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+  </body>
+</html>
