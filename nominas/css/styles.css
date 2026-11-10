@@ -1280,7 +1280,7 @@ dialog .btns {
 }
 @media (max-width: 640px) {
   .payroll tbody tr:not(.payroll-section) td {
-    padding: 10px 5px;
+    padding: 10px 2.5px;
   }
   .payroll thead th {
     padding: 8px 6px;
