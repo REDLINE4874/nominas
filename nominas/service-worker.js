@@ -1,4 +1,4 @@
-﻿const V='nominas-v11',SHELL=['./','index.html','manifest.json','css/styles.css','js/config.js','js/calculations.js','js/supabase.js','js/utils.js','js/periodo.js','js/dashboard.js','js/plantillas.js','js/movimientos.js','js/nominas.js','js/historial.js','js/ajustes.js','js/app.js','js/auth.js','login.html','assets/icons/icon-192.png'];
+const V='nominas-v24',SHELL=['./','index.html','manifest.json','css/styles.css','js/config.js','js/calculations.js','js/supabase.js','js/utils.js','js/periodo.js','js/dashboard.js','js/plantillas.js','js/movimientos.js','js/nominas.js','js/historial.js','js/ajustes.js','js/app.js','js/auth.js','login.html','assets/icons/icon-192.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(SHELL)));self.skipWaiting()});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==V).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{const u=new URL(e.request.url);

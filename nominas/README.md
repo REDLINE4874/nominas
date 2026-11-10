@@ -1,4 +1,5 @@
 # Nóminas semanales (PWA)
+Para proyectos Supabase existentes, ejecuta `database/migration_control_pagos.sql` en SQL Editor para habilitar el seguimiento individual de pagos.
 1. Supabase: crea proyecto → SQL Editor → ejecuta `database/schema.sql`.
 2. Pon URL y clave **anon** en `js/config.js` (nunca la service_role).
 3. Crea usuarios en Authentication > Users. Todo usuario autenticado tiene permisos administrativos. Para registrar su perfil opcional:

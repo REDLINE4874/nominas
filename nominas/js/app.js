@@ -5,6 +5,7 @@ const go = run(async (v) => {
   S.view = v;
   $("#main").classList.toggle("capture-page", v === "movimientos");
   $("#main").classList.toggle("payroll-page", v === "nomina");
+  $("#main").classList.toggle("history-page", v === "historial");
   document
     .querySelectorAll("[data-v]")
     .forEach((b) => b.classList.toggle("on", b.dataset.v === v));

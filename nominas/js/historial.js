@@ -23,7 +23,7 @@ V.historial = async () => {
       table(
         rows,
         (r) =>
-          `<td><button class="btn" data-a="${r.id}">Cambios</button>${isAdmin() ? `<button class="btn" data-c="${r.id}">Corregir</button>` : ""}</td>`,
+          `<button class="btn" data-a="${r.id}">Cambios</button>${isAdmin() ? `<button class="btn" data-c="${r.id}">Corregir</button>` : ""}`,
       ) +
       '<div class="btns"><button class="btn" id="csv">Exportar CSV</button></div><div id="aud"></div>';
     $("#csv").onclick = () => {
@@ -41,6 +41,7 @@ V.historial = async () => {
         "retardos",
         "descuentos",
         "pago_final",
+        "pagado",
       ];
       const c = [
         h.join(","),

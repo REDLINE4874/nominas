@@ -7,7 +7,7 @@ create table periodos(id uuid primary key default gen_random_uuid(), inicio date
 create table mov_ejecutivos(id uuid primary key default gen_random_uuid(), periodo_id uuid not null references periodos, ejecutivo_id uuid not null references ejecutivos, ventas int not null default 0 check(ventas>=0), bonos numeric(12,2) not null default 0 check(bonos>=0), faltas int not null default 0 check(faltas>=0), retardos int not null default 0 check(retardos>=0), updated_at timestamptz default now(), unique(periodo_id,ejecutivo_id));
 create table mov_administrativos(id uuid primary key default gen_random_uuid(), periodo_id uuid not null references periodos, admin_id uuid not null references administrativos, ventas int not null default 0 check(ventas>=0), salario_base numeric(12,2) not null default 0 check(salario_base>=0), updated_at timestamptz default now(), unique(periodo_id,admin_id));
 create table nominas(id uuid primary key default gen_random_uuid(), periodo_id uuid not null unique references periodos, generado_por uuid not null references auth.users, created_at timestamptz default now());
-create table nomina_detalle(id uuid primary key default gen_random_uuid(), nomina_id uuid not null references nominas on delete cascade, tipo text not null check(tipo in('EJECUTIVO','ADMIN')), empleado_id uuid not null, nombre text not null, esquema text, horario text, salario_base numeric(12,2) not null, ventas int not null, tarifa numeric(12,2) not null, comision numeric(12,2) not null, bonos numeric(12,2) not null default 0, faltas int not null default 0, retardos int not null default 0, descuentos numeric(12,2) not null default 0, excedente_descuento numeric(12,2) not null default 0, pago_final numeric(12,2) not null, corregido boolean not null default false);
+create table nomina_detalle(id uuid primary key default gen_random_uuid(), nomina_id uuid not null references nominas on delete cascade, tipo text not null check(tipo in('EJECUTIVO','ADMIN')), empleado_id uuid not null, nombre text not null, esquema text, horario text, salario_base numeric(12,2) not null, ventas int not null, tarifa numeric(12,2) not null, comision numeric(12,2) not null, bonos numeric(12,2) not null default 0, faltas int not null default 0, retardos int not null default 0, descuentos numeric(12,2) not null default 0, excedente_descuento numeric(12,2) not null default 0, pago_final numeric(12,2) not null, corregido boolean not null default false, pagado boolean not null default false);
 create table nomina_auditoria(id uuid primary key default gen_random_uuid(), detalle_id uuid not null references nomina_detalle, usuario uuid not null, motivo text not null check(length(trim(motivo))>0), anterior jsonb not null, nuevo jsonb not null, created_at timestamptz default now());
 create index on nomina_detalle(nomina_id); create index on mov_ejecutivos(periodo_id); create index on mov_administrativos(periodo_id); create index on nomina_auditoria(detalle_id);
 
@@ -69,8 +69,13 @@ declare d nomina_detalle; c record; old jsonb; begin
   update nomina_detalle set ventas=p_ventas,salario_base=p_salario,comision=p_ventas*400,pago_final=p_salario+p_ventas*400,corregido=true where id=p_detalle;
  end if;
  insert into nomina_auditoria(detalle_id,usuario,motivo,anterior,nuevo) select p_detalle,auth.uid(),p_motivo,old,to_jsonb(x) from nomina_detalle x where id=p_detalle; end $$;
-revoke all on function generar_nomina(uuid),corregir_detalle(uuid,int,numeric,int,int,numeric,text),get_periodo(date) from public;
-grant execute on function generar_nomina(uuid),corregir_detalle(uuid,int,numeric,int,int,numeric,text),get_periodo(date) to authenticated;
+create function marcar_detalle_pagado(p_detalle uuid,p_pagado boolean) returns void language plpgsql security definer set search_path=public as $$ begin
+ if not is_staff() then raise exception 'Sin permisos'; end if;
+ update nomina_detalle set pagado=p_pagado where id=p_detalle;
+ if not found then raise exception 'Detalle inexistente'; end if;
+end $$;
+revoke all on function generar_nomina(uuid),corregir_detalle(uuid,int,numeric,int,int,numeric,text),get_periodo(date),marcar_detalle_pagado(uuid,boolean) from public;
+grant execute on function generar_nomina(uuid),corregir_detalle(uuid,int,numeric,int,int,numeric,text),get_periodo(date),marcar_detalle_pagado(uuid,boolean) to authenticated;
 
 alter table profiles enable row level security; alter table ejecutivos enable row level security; alter table administrativos enable row level security; alter table periodos enable row level security;
 alter table mov_ejecutivos enable row level security; alter table mov_administrativos enable row level security; alter table nominas enable row level security; alter table nomina_detalle enable row level security; alter table nomina_auditoria enable row level security;

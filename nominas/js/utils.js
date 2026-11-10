@@ -66,9 +66,13 @@ document.addEventListener("click", (event) => {
   });
 });
 const mxn = (n) =>
-  new Intl.NumberFormat("es-MX", { style: "currency", currency: "MXN" }).format(
-    n || 0,
-  );
+  new Intl.NumberFormat("es-MX", {
+    style: "currency",
+    currency: "MXN",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(n || 0);
+const mxnWhole = mxn;
 const pad = (n) => String(n).padStart(2, "0"),
   fmt = (d) =>
     `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;

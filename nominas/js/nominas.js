@@ -8,12 +8,35 @@ V.nomina = async () => {
     (pend && (pend.ej || pend.ad)
       ? `<p class="tag warn">Faltan movimientos: ${pend.ej} ejecutivo(s), ${pend.ad} administrativo(s).</p>`
       : "") +
-    table(rows) +
+    table(
+      rows,
+      nom
+        ? (r) =>
+            `<button class="btn" data-paid="${r.id}" data-value="${!r.pagado}">${r.pagado ? "Pagado" : "Pagar"}</button>`
+        : null,
+      nom
+        ? (r) =>
+            `<button class="btn payroll-pay-inline" data-paid="${r.id}" data-value="${!r.pagado}">${r.pagado ? "Pagado" : "Pagar"}</button>`
+        : null,
+    ) +
     `<div class="card payroll-total"><b>Total de nómina: ${mxn(tot)}</b><span>${rows.length} empleado(s)</span></div>` +
     (!nom && isAdmin()
       ? '<button class="btn pri" id="gen">Generar nómina</button>'
       : "");
   bindWeek();
+  document.querySelectorAll("[data-paid]").forEach(
+    (b) =>
+      (b.onclick = run(async () => {
+        await q(
+          sb.rpc("marcar_detalle_pagado", {
+            p_detalle: b.dataset.paid,
+            p_pagado: b.dataset.value === "true",
+          }),
+        );
+        toast(b.dataset.value === "true" ? "Pago registrado" : "Pago desmarcado");
+        go("nomina");
+      })),
+  );
   if ($("#gen"))
     $("#gen").onclick = run(async () => {
       if (!confirm("¿Generar la nómina de esta semana? No se puede duplicar."))
