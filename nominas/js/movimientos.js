@@ -23,10 +23,28 @@ V.movimientos = async () => {
   $("#main").innerHTML =
     weekBar() +
     (nom ? '<p class="tag warn">Esta nómina ya fue generada; la captura está bloqueada.</p>' : '<p class="muted">Captura los datos de todos los empleados activos y guarda la semana una sola vez.</p>') +
-    `<section class="capture-group"><h3>Ejecutivos</h3>${executiveCards || '<p class="muted">Sin ejecutivos activos.</p>'}</section>` +
+    `<section class="capture-group capture-executives"><h3>Ejecutivos</h3>${executiveCards || '<p class="muted">Sin ejecutivos activos.</p>'}</section>` +
     `<section class="capture-group"><h3>Administrativos</h3>${administrativeCards || '<p class="muted">Sin administrativos activos.</p>'}</section>` +
     (!nom && count ? `<button class="btn pri save-all" id="save-all">Guardar captura de la semana <span>${count}</span></button>` : "");
   bindWeek();
+  const capture = $("#main");
+  capture.querySelectorAll('.mov input[type="number"]').forEach((field) => {
+    field.onfocus = () => {
+    field.dataset.initialValue = field.value;
+    field.dataset.edited = "false";
+    if (Number(field.value) === 0) field.value = "";
+    };
+    field.oninput = () => {
+      field.dataset.edited = "true";
+    };
+    field.onblur = () => {
+      if (!field.value && field.dataset.edited !== "true") {
+        field.value = field.dataset.initialValue || "0";
+      }
+      delete field.dataset.initialValue;
+      delete field.dataset.edited;
+    };
+  });
   const save = $("#save-all");
   if (!save) return;
   save.onclick = run(async () => {

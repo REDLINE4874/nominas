@@ -186,6 +186,7 @@ label select {
   background: var(--ac);
   color: var(--on);
   box-shadow: var(--raised-small);
+  max-width: fit-content;
 }
 .btn.pri:hover {
   filter: brightness(1.05);
@@ -812,6 +813,7 @@ dialog .btns {
   margin-bottom: 11px;
   padding: 13px 16px;
   border-radius: 16px;
+  max-width: 650px;
 }
 .mov-heading {
   display: flex;
@@ -851,6 +853,7 @@ dialog .btns {
 .capture-group h3 {
   margin: 22px 2px 10px;
 }
+
 .save-all {
   position: sticky;
   bottom: 14px;
@@ -909,6 +912,19 @@ dialog .btns {
 
 .field {
   margin: 0 0 10px;
+}
+.capture-executives {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 12px;
+}
+.capture-executives > h3,
+.capture-executives > .muted {
+  grid-column: 1 / -1;
+}
+.capture-executives > .mov {
+  margin: 0;
 }
 .field-label {
   display: block;
