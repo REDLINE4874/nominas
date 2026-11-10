@@ -927,6 +927,9 @@ dialog .btns {
   .capture-group {
     grid-template-columns: minmax(0, 1fr);
   }
+  .capture-executives {
+    grid-template-columns: minmax(0, 1fr);
+  }
   .mov-role {
     font-size: 0.7rem;
   }
@@ -944,6 +947,11 @@ dialog .btns {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: start;
   gap: 12px;
+}
+@media (max-width: 600px) {
+  .capture-executives {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 .capture-executives > h3,
 .capture-executives > .muted {
