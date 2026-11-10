@@ -33,8 +33,27 @@ V.nomina = async () => {
             p_pagado: b.dataset.value === "true",
           }),
         );
-        toast(b.dataset.value === "true" ? "Pago registrado" : "Pago desmarcado");
-        go("nomina");
+        const paid = b.dataset.value === "true";
+        const row = b.closest("tr");
+        if (row) {
+          row.classList.toggle("payroll-paid", paid);
+          const name = row.querySelector('[data-col="name"]');
+          let tag = name?.querySelector(".paid-tag");
+          if (paid && name && !tag) {
+            tag = document.createElement("span");
+            tag.className = "tag paid-tag";
+            tag.textContent = "Pagado";
+            name.append(" ", tag);
+          } else if (!paid) {
+            tag?.remove();
+          }
+        }
+        document.querySelectorAll(`[data-paid="${CSS.escape(b.dataset.paid)}"]`).forEach((button) => {
+          button.dataset.value = String(!paid);
+          button.textContent = paid ? "Pagado" : "Pagar";
+          button.setAttribute("aria-pressed", String(paid));
+        });
+        toast(paid ? "Pago registrado" : "Pago desmarcado");
       })),
   );
   if ($("#gen"))

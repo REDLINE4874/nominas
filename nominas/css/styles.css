@@ -331,7 +331,7 @@ header .btn {
 }
 main {
   width: 100%;
-  max-width: 1600px;
+  max-width: 1700px;
   margin: 0 auto;
   padding: 0 18px 18px;
 }
@@ -984,7 +984,7 @@ dialog .btns {
   }
 }
 #main.payroll-page {
-  max-width: 1600px;
+  max-width: 1700px;
 }
 .payroll-page .payroll {
   width: 100%;
@@ -1304,6 +1304,9 @@ table tbody td {
 }
 .payroll tbody tr.payroll-paid td {
   background: color-mix(in srgb, #49a879 24%, var(--pn));
+}
+.payroll tbody tr:not(.payroll-section) td {
+  transition: background-color 220ms ease;
 }
 @media (max-width: 640px) {
   .payroll thead th[data-col="name"] {
