@@ -1306,7 +1306,7 @@ table tbody td {
   background: color-mix(in srgb, #49a879 24%, var(--pn));
 }
 .payroll tbody tr:not(.payroll-section) td {
-  transition: background-color 220ms ease;
+  transition: background-color 80ms ease-out;
 }
 @media (max-width: 640px) {
   .payroll thead th[data-col="name"] {
